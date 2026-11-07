@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="QuickTool은 할인율, 부가세, 저축 목표, 글자 수를 계산하는 무료 도구 모음입니다.">
+<title>QuickTool | 간편한 무료 계산 도구</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#162239;--line:#2b3c59;--text:#f0f5ff;--muted:#a9b8d0;--accent:#7c9cff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Malgun Gothic",sans-serif;background:radial-gradient(circle at 85% 0%,#1b3153,transparent 45%),var(--bg);color:var(--text)}
+header,main,footer{max-width:1020px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.brand{font-size:22px;font-weight:850}.brand b{color:var(--accent)}.tag{font-size:12px;color:var(--muted)}
+.hero{padding:45px 0 30px}.hero h1{font-size:clamp(30px,5vw,48px);margin:8px 0}.hero p{color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h2{font-size:20px;margin:0 0 7px}.card p{font-size:13px;color:var(--muted);margin:0 0 22px;line-height:1.6}
+label{display:block;font-size:13px;margin:13px 0 6px;color:#c5d2e8}
+input,textarea{width:100%;background:#0c1728;color:var(--text);border:1px solid #3a4d6d;border-radius:10px;padding:12px;font:inherit}
+input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+textarea{resize:vertical;min-height:110px}
+button{width:100%;border:0;border-radius:10px;background:var(--accent);color:#071327;font-weight:800;font-size:14px;padding:12px;margin-top:16px;cursor:pointer}
+.result{margin-top:16px;background:#0b1729;border:1px solid #304866;border-radius:10px;padding:15px;min-height:56px;line-height:1.7;overflow-wrap:anywhere}
+.result strong{color:#a6d9ff;font-size:20px}
+small{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding-bottom:45px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.card{padding:19px}.hero{padding-top:27px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Quick<b>Tool</b>.</div><span class="tag">FREE WEB TOOLS</span></header>
+<main>
+<section class="hero"><div class="tag">빠르고 간편한 일상 도구</div><h1>복잡한 계산을<br>더 간단하게.</h1><p>설치와 회원가입 없이 사용할 수 있는 무료 계산 도구 4가지.<br>입력값은 서버로 전송되지 않습니다.</p></section>
+<div class="grid">
+<section class="card">
+<h2>🏷️ 할인율 계산기</h2><p>원래 가격과 할인율을 입력하면 최종 가격을 알려드려요.</p>
+<label for="original">원래 가격 (원)</label><input id="original" type="number" min="0" step="any" placeholder="예: 50000">
+<label for="discount">할인율 (%)</label><input id="discount" type="number" min="0" max="100" step="any" placeholder="예: 20">
+<button id="discountBtn">할인 가격 계산</button><div class="result" id="discountResult" role="status">결과가 여기에 표시됩니다.</div>
+</section>
+<section class="card">
+<h2>🧾 부가세 계산기</h2><p>10% 부가가치세를 포함하거나 제외한 금액을 계산해요.</p>
+<label for="vatAmount">금액 (원)</label><input id="vatAmount" type="number" min="0" step="any" placeholder="예: 110000">
+<label for="vatMode">계산 방식</label><select id="vatMode" style="width:100%;background:#0c1728;color:#f0f5ff;border:1px solid #3a4d6d;border-radius:10px;padding:12px"><option value="included">부가세 포함 금액에서 분리</option><option value="excluded">부가세 제외 금액에 추가</option></select>
+<button id="vatBtn">부가세 계산</button><div class="result" id="vatResult" role="status">결과가 여기에 표시됩니다.</div>
+</section>
+<section class="card">
+<h2>🎯 목표 저축 계산기</h2><p>목표 금액을 모으기 위해 매달 얼마를 저축할지 계산해요.</p>
+<label for="goal">목표 금액 (원)</label><input id="goal" type="number" min="0" step="any" placeholder="예: 1000000">
+<label for="saved">현재 모은 돈 (원)</label><input id="saved" type="number" min="0" step="any" placeholder="예: 200000">
+<label for="months">남은 기간 (개월)</label><input id="months" type="number" min="1" step="1" placeholder="예: 8">
+<button id="savingBtn">저축액 계산</button><div class="result" id="savingResult" role="status">결과가 여기에 표시됩니다.</div>
+</section>
+<section class="card">
+<h2>✍️ 글자 수 계산기</h2><p>글자 수와 단어 수를 바로 확인할 수 있어요.</p>
+<label for="writing">텍스트 입력</label><textarea id="writing" placeholder="여기에 글을 입력하세요."></textarea>
+<div class="result" id="textResult" role="status"><strong>0자</strong> (공백 포함)<br>공백 제외 0자 · 단어 0개</div>
+<small>한글·영문 등 일반적인 글자 수를 계산합니다.</small>
+</section>
+</div>
+<section style="padding:35px 0;color:#a9b8d0;font-size:13px;line-height:1.8">
+<h2 style="color:#f0f5ff">QuickTool 소개</h2>
+QuickTool은 일상에서 자주 필요한 계산을 빠르게 처리하기 위한 개인 개발 프로젝트입니다.
+금융·세무 상담을 대신하지 않으며, 부가세 계산은 단순 10% 계산 예시입니다.
+</section>
+</main>
+<footer>© 2026 QuickTool · 무료 계산 도구 · 개인 프로젝트</footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const won=n=>Math.round(n).toLocaleString("ko-KR")+"원";
+function number(id){const raw=$(id).value.trim();if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)?n:null;}
+function error(id,msg){$(id).textContent=msg;}
+$("discountBtn").addEventListener("click",()=>{
+ const p=number("original"),d=number("discount");
+ if(p===null||p<0||d===null||d<0||d>100){error("discountResult","가격은 0 이상, 할인율은 0~100 사이로 입력하세요.");return;}
+ const savings=p*d/100;
+ $("discountResult").innerHTML="<strong>"+won(p-savings)+"</strong><br>할인 금액: "+won(savings);
+});
+$("vatBtn").addEventListener("click",()=>{
+ const amount=number("vatAmount");
+ if(amount===null||amount<0){error("vatResult","0 이상의 금액을 입력하세요.");return;}
+ const included=$("vatMode").value==="included";
+ const supply=included?amount/1.1:amount;
+ const vat=included?amount-supply:amount*.1;
+ $("vatResult").innerHTML="<strong>합계 "+won(supply+vat)+"</strong><br>공급가액: "+won(supply)+"<br>부가세: "+won(vat);
+});
+$("savingBtn").addEventListener("click",()=>{
+ const goal=number("goal"),saved=number("saved"),months=number("months");
+ if(goal===null||goal<0||saved===null||saved<0||months===null||months<1||!Number.isInteger(months)){error("savingResult","금액은 0 이상, 기간은 1 이상의 정수로 입력하세요.");return;}
+ const remaining=Math.max(0,goal-saved);
+ $("savingResult").innerHTML="<strong>월 "+won(Math.ceil(remaining/months))+"</strong><br>남은 목표 금액: "+won(remaining)+"<br><small>이자와 수수료는 제외한 단순 계산입니다.</small>";
+});
+$("writing").addEventListener("input",()=>{
+ const value=$("writing").value;
+ const chars=Array.from(value);
+ const nonspace=chars.filter(c=>!/\s/u.test(c)).length;
+ const words=value.trim()?value.trim().split(/\s+/u).length:0;
+ $("textResult").innerHTML="<strong>"+chars.length.toLocaleString("ko-KR")+"자</strong> (공백 포함)<br>공백 제외 "+nonspace.toLocaleString("ko-KR")+"자 · 단어 "+words.toLocaleString("ko-KR")+"개";
+});
+</script>
+</body></html>
