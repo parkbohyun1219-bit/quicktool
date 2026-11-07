@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="QuickTool은 할인율, 부가세, 저축 목표, 글자 수를 계산하는 무료 도구 모음입니다.">
-<title>QuickTool | 간편한 무료 계산 도구</title>
+<meta name="description" content="QuickTool은 할인율, 부가세, 저축 목표, 글자 수, 퍼센트, 날짜 차이를 계산하는 무료 도구 모음입니다.">
+<title>QuickTool | 무료 계산기 6종</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1220;--panel:#162239;--line:#2b3c59;--text:#f0f5ff;--muted:#a9b8d0;--accent:#7c9cff}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,"Malgun Gothic",sans-serif;background:radial-gradient(circle at 85% 0%,#1b3153,transparent 45%),var(--bg);color:var(--text)}
@@ -16,9 +16,10 @@ header{display:flex;justify-content:space-between;align-items:center;border-bott
 .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
 .card h2{font-size:20px;margin:0 0 7px}.card p{font-size:13px;color:var(--muted);margin:0 0 22px;line-height:1.6}
 label{display:block;font-size:13px;margin:13px 0 6px;color:#c5d2e8}
-input,textarea{width:100%;background:#0c1728;color:var(--text);border:1px solid #3a4d6d;border-radius:10px;padding:12px;font:inherit}
+input,textarea,select{width:100%;background:#0c1728;color:var(--text);border:1px solid #3a4d6d;border-radius:10px;padding:12px;font:inherit}
 input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
 textarea{resize:vertical;min-height:110px}
+button:hover{filter:brightness(1.09)}button:focus-visible{outline:3px solid #fff;outline-offset:2px}.copy{background:#293c5c;color:#dce8ff;margin-top:9px;font-size:12px}.result{white-space:normal}
 button{width:100%;border:0;border-radius:10px;background:var(--accent);color:#071327;font-weight:800;font-size:14px;padding:12px;margin-top:16px;cursor:pointer}
 .result{margin-top:16px;background:#0b1729;border:1px solid #304866;border-radius:10px;padding:15px;min-height:56px;line-height:1.7;overflow-wrap:anywhere}
 .result strong{color:#a6d9ff;font-size:20px}
@@ -29,7 +30,7 @@ small{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:1
 <body>
 <header><div class="brand">Quick<b>Tool</b>.</div><span class="tag">FREE WEB TOOLS</span></header>
 <main>
-<section class="hero"><div class="tag">빠르고 간편한 일상 도구</div><h1>복잡한 계산을<br>더 간단하게.</h1><p>설치와 회원가입 없이 사용할 수 있는 무료 계산 도구 4가지.<br>입력값은 서버로 전송되지 않습니다.</p></section>
+<section class="hero"><div class="tag">빠르고 간편한 일상 도구</div><h1>복잡한 계산을<br>더 간단하게.</h1><p>설치와 회원가입 없이 사용할 수 있는 무료 계산 도구 6가지.<br>입력값은 서버로 전송되지 않습니다.</p></section>
 <div class="grid">
 <section class="card">
 <h2>🏷️ 할인율 계산기</h2><p>원래 가격과 할인율을 입력하면 최종 가격을 알려드려요.</p>
@@ -56,14 +57,27 @@ small{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:1
 <div class="result" id="textResult" role="status"><strong>0자</strong> (공백 포함)<br>공백 제외 0자 · 단어 0개</div>
 <small>한글·영문 등 일반적인 글자 수를 계산합니다.</small>
 </section>
+
+<section class="card">
+<h2>📊 퍼센트 계산기</h2><p>전체 금액 중 특정 값이 몇 퍼센트인지 확인해요.</p>
+<label for="part">부분 값</label><input id="part" type="number" step="any" placeholder="예: 25">
+<label for="whole">전체 값</label><input id="whole" type="number" step="any" placeholder="예: 200">
+<button id="percentBtn">퍼센트 계산</button><div class="result" id="percentResult" role="status">결과가 여기에 표시됩니다.</div>
+</section>
+<section class="card">
+<h2>📅 날짜 차이 계산기</h2><p>두 날짜 사이에 며칠이 있는지 계산해요.</p>
+<label for="startDate">시작 날짜</label><input id="startDate" type="date">
+<label for="endDate">종료 날짜</label><input id="endDate" type="date">
+<button id="dateBtn">날짜 차이 계산</button><div class="result" id="dateResult" role="status">결과가 여기에 표시됩니다.</div>
+</section>
 </div>
 <section style="padding:35px 0;color:#a9b8d0;font-size:13px;line-height:1.8">
 <h2 style="color:#f0f5ff">QuickTool 소개</h2>
-QuickTool은 일상에서 자주 필요한 계산을 빠르게 처리하기 위한 개인 개발 프로젝트입니다.
+QuickTool은 일상에서 자주 필요한 계산을 빠르게 처리하기 위한 개인 개발 프로젝트입니다. 계산 결과는 참고용이며 중요한 거래나 세금 신고에는 별도 확인이 필요합니다.
 금융·세무 상담을 대신하지 않으며, 부가세 계산은 단순 10% 계산 예시입니다.
 </section>
 </main>
-<footer>© 2026 QuickTool · 무료 계산 도구 · 개인 프로젝트</footer>
+<footer>© 2026 QuickTool v2.0 · 무료 계산 도구 · 개인 프로젝트</footer>
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
@@ -97,5 +111,36 @@ $("writing").addEventListener("input",()=>{
  const words=value.trim()?value.trim().split(/\s+/u).length:0;
  $("textResult").innerHTML="<strong>"+chars.length.toLocaleString("ko-KR")+"자</strong> (공백 포함)<br>공백 제외 "+nonspace.toLocaleString("ko-KR")+"자 · 단어 "+words.toLocaleString("ko-KR")+"개";
 });
+
+$("percentBtn").addEventListener("click",()=>{
+ const part=number("part"),whole=number("whole");
+ if(part===null||whole===null||whole===0){error("percentResult","숫자를 입력하고 전체 값은 0이 아니어야 합니다.");return;}
+ const percentage=part/whole*100;
+ $("percentResult").innerHTML="<strong>"+percentage.toLocaleString("ko-KR",{maximumFractionDigits:2})+"%</strong><br>"+part.toLocaleString("ko-KR")+" ÷ "+whole.toLocaleString("ko-KR")+" × 100";
+});
+function utcDate(value){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
+ const [y,m,d]=value.split("-").map(Number);
+ const ms=Date.UTC(y,m-1,d);
+ const date=new Date(ms);
+ return date.getUTCFullYear()===y&&date.getUTCMonth()===m-1&&date.getUTCDate()===d?ms:null;
+}
+$("dateBtn").addEventListener("click",()=>{
+ const a=utcDate($("startDate").value),b=utcDate($("endDate").value);
+ if(a===null||b===null){error("dateResult","시작 날짜와 종료 날짜를 선택하세요.");return;}
+ const days=Math.round(Math.abs(b-a)/86400000);
+ $("dateResult").innerHTML="<strong>"+days.toLocaleString("ko-KR")+"일</strong><br>시작일과 종료일의 차이 (시작일 제외)";
+});
+for(const element of document.querySelectorAll(".result")){
+ const copy=document.createElement("button");copy.type="button";copy.className="copy";copy.textContent="결과 복사";
+ copy.addEventListener("click",async()=>{
+  const value=element.innerText.trim();
+  if(value==="결과가 여기에 표시됩니다."){copy.textContent="먼저 계산해 주세요";return;}
+  try{await navigator.clipboard.writeText(value);copy.textContent="복사 완료!";}
+  catch{copy.textContent="복사 불가: 텍스트를 선택해 복사하세요";}
+  setTimeout(()=>copy.textContent="결과 복사",1800);
+ });
+ element.insertAdjacentElement("afterend",copy);
+}
 </script>
 </body></html>
